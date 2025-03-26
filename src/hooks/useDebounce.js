@@ -6,7 +6,7 @@
 //  * @param {number} delay - Delay in milliseconds
 //  * @returns {any} Debounced value
 //  */
-export function useDebounce(value, delay = 500) {
+const useDebounce = (value, delay = 500) => {
   const [debouncedValue, setDebouncedValue] = useState(value);
 
   useEffect(() => {
@@ -19,3 +19,5 @@ export function useDebounce(value, delay = 500) {
 
   return debouncedValue;
 }
+
+export default useDebounce;

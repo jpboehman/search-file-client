@@ -9,7 +9,7 @@ import {
 } from "../styles/SearchPageStyles";
 import SearchResults from "../components/SearchResults";
 
-export default function SearchPage() {
+const SearchPage = () => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
 
@@ -77,3 +77,5 @@ export default function SearchPage() {
     </SearchContainer>
   );
 }
+
+export default SearchPage;

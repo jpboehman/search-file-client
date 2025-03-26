@@ -73,7 +73,7 @@ const Message = styled.p`
   color: ${(props) => (props.error ? "red" : "green")};
 `;
 
-export default function FileUploader() {
+const FileUploader = () => {
   const [file, setFile] = useState(null);
   const [uploadedBy, setUploadedBy] = useState("");
   const [tags, setTags] = useState("");
@@ -163,4 +163,6 @@ export default function FileUploader() {
       {message && <Message error={error}>{message}</Message>}
     </UploadContainer>
   );
-}
+};
+
+export default FileUploader;
