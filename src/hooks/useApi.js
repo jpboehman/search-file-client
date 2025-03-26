@@ -9,40 +9,38 @@
  * useApi: Custom hook for fetching data from an API.
  * - Automatically handles loading, errors, and cleanup.
  * - Uses a cleanup function to avoid state updates on unmounted components.
- * 
+ *
  * @param {string} url - API endpoint
  * @returns {Object} { data, isLoading, error }
  */
 export const useApi = (url) => {
-    const [data, setData] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(null);
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-    useEffect(() => {
-        let isMounted = true; // Prevents state updates if unmounted - key for custom hooks
+  useEffect(() => {
+    let isMounted = true; // Prevents state updates if unmounted - key for custom hooks
 
-        const fetchData = async () => {
-            try {
-                const response = await axios.get(url);
-                if (isMounted) {
-                    setData(response.data);
-                    setIsLoading(false);
-                }
-            } catch (error) {
-                if (isMounted) {
-                    setError(error);
-                    setIsLoading(false);
-                }
-            }
-        };
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(url);
+        if (isMounted) {
+          setData(response.data);
+          setIsLoading(false);
+        }
+      } catch (error) {
+        if (isMounted) {
+          setError(error);
+          setIsLoading(false);
+        }
+      }
+    };
 
-        fetchData();
+    fetchData();
 
-        // Cleanup function to prevent state updates on unmounted components
-        return () => isMounted = false;
-    }, [url]);
-    
-    return { data, isLoading, error };
+    // Cleanup function to prevent state updates on unmounted components
+    return () => (isMounted = false);
+  }, [url]);
+
+  return { data, isLoading, error };
 };
-
-

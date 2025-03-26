@@ -1,6 +1,6 @@
 import FileUploader from "../components/FileUploader";
 
-export default function UploadPage() {
+const UploadPage = () => {
   return (
     <div>
       <h1>File Upload</h1>
@@ -8,3 +8,5 @@ export default function UploadPage() {
     </div>
   );
 }
+
+export default UploadPage;
