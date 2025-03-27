@@ -9,7 +9,13 @@ const ResultItem = styled.div`
 `;
 
 const SearchResults = ({ results }) => {
-  if (!results.length) return <p>No results found.</p>;
+  if (!results.length)
+    return (
+      // margin: 0 auto -> centers the text horizontally
+      <p style={{ margin: "0 auto" }}>
+        <strong>No results found</strong>
+      </p>
+    );
 
   return results.map((file) => (
     <ResultItem key={file._id}>

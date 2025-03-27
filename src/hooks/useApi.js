@@ -14,33 +14,35 @@
  * @returns {Object} { data, isLoading, error }
  */
 export const useApi = (url) => {
-  const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [state, setState] = useState({
+    data: null,
+    isLoading: true,
+    error: null,
+  });
 
   useEffect(() => {
-    let isMounted = true; // Prevents state updates if unmounted - key for custom hooks
+    let isMounted = true;
 
     const fetchData = async () => {
+      setState((prevState) => ({ ...prevState, isLoading: true, error: null }));
       try {
         const response = await axios.get(url);
         if (isMounted) {
-          setData(response.data);
-          setIsLoading(false);
+          setState({ data: response.data, isLoading: false, error: null });
         }
       } catch (error) {
         if (isMounted) {
-          setError(error);
-          setIsLoading(false);
+          setState({ data: null, isLoading: false, error });
         }
       }
     };
 
     fetchData();
 
-    // Cleanup function to prevent state updates on unmounted components
-    return () => (isMounted = false);
+    return () => {
+      isMounted = false;
+    };
   }, [url]);
 
-  return { data, isLoading, error };
+  return state;
 };

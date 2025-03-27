@@ -43,7 +43,9 @@ const SearchPage = () => {
 
   return (
     <SearchContainer>
-      <h1>Search Files</h1>
+      <h1 style={{ margin: "0 auto", padding: 20, paddingBottom: 80 }}>
+        Search Files
+      </h1>
       <SearchInput
         type="text"
         value={query}
