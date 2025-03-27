@@ -8,6 +8,7 @@ import {
   FilterInput,
 } from "../styles/SearchPageStyles";
 import SearchResults from "../components/SearchResults";
+import FileTypeDropdown from "@/components/FileTypeDropdown";
 
 const SearchPage = () => {
   const [query, setQuery] = useState("");
@@ -66,16 +67,12 @@ const SearchPage = () => {
         />
 
         <FilterLabel>File Type:</FilterLabel>
-        <FilterInput
-          type="text"
-          value={fileType}
-          onChange={(e) => setFileType(e.target.value)}
-        />
+        <FileTypeDropdown onChange={(value) => setFileType(value)} />
       </FilterSection>
 
       <SearchResults results={results} />
     </SearchContainer>
   );
-}
+};
 
 export default SearchPage;

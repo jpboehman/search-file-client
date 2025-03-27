@@ -54,6 +54,8 @@ const UploadButton = styled.button`
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.2s ease;
+  margin: 0 auto; /* Center horizontally */
+  display: block; /* Ensure it's treated as a block element */
 
   &:hover {
     background-color: #0059c1;
