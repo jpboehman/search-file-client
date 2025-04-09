@@ -1,9 +1,5 @@
-// import { useState, useEffect } from "react";
-// import axios from "axios";
-
-// React custom hooks are functions that allow you to use state and other React features in functional components.
-// They are a way to REUSE stateful logic between different components.
-// Custom hooks are prefixed with `use` and can call other hooks if needed.
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 /**
  * useApi: Custom hook for fetching data from an API.
@@ -14,35 +10,40 @@
  * @returns {Object} { data, isLoading, error }
  */
 export const useApi = (url) => {
-  const [state, setState] = useState({
+  const [responseState, setResponseState] = useState({
     data: null,
-    isLoading: true,
+    isLoadingL: true,
     error: null,
   });
 
   useEffect(() => {
+    // Prevents state updates on unmounted components
     let isMounted = true;
 
     const fetchData = async () => {
-      setState((prevState) => ({ ...prevState, isLoading: true, error: null }));
+      setResponseState((prevState) => ({
+        ...prevState,
+        isLoading: true,
+        error: null,
+      }));
       try {
         const response = await axios.get(url);
         if (isMounted) {
-          setState({ data: response.data, isLoading: false, error: null });
+          setResponseState({
+            data: response.data,
+          });
         }
       } catch (error) {
         if (isMounted) {
-          setState({ data: null, isLoading: false, error });
+          setResponseState({ data: null, isLoading: false, error });
         }
       }
     };
 
     fetchData();
 
-    return () => {
-      isMounted = false;
-    };
+    return () => (isMounted = false);
   }, [url]);
 
-  return state;
+  return responseState;
 };
